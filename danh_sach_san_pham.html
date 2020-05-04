@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách sản phẩm</title>
+    <script src="https://kit.fontawesome.com/f20d460fd9.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="sanpham.js"></script>
+    <script src="giohang.js"></script>
+    <script src="hotro.js"></script>
+    
+</head>
+
+<body>
+    <nav id="nav-bar">
+        <ul class="menu-level-1">
+            <li class="item-level-1">
+                <a href="#" class="item-level-1-title">Quần áo</a>
+                <ul class="menu-level-2">
+                    <li class="item-level-2">
+                        <a href="#" class="item-level-2-title">Quần áo nam</a>
+                    </li>
+                    <li class="item-level-2">
+                        <a href="#" class="item-level-2-title">Quần áo nữ</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="item-level-1">
+                <a href="#" class="item-level-1-title">Phụ kiện</a>
+            </li>
+            <li class="item-level-1">
+                <a href="#" class="item-level-1-title">Đồ điện tử</a>
+                <ul class="menu-level-2">
+                    <li class="item-level-2">
+                        <a href="danh_sach_san_pham.html" class="item-level-2-title">Điện thoại</a>
+                    </li>
+                    <li class="item-level-2">
+                        <a href="#" class="item-level-2-title">Đồ gia dụng</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="item-level-1">
+                <a href="themvaogiohang.html"><i class="fas fa-cart-plus"></i></a>
+            </li>
+        </ul>
+    </nav>
+
+    <section id="slider">
+       
+            <div class="slider">
+                <div class="slider-item" name='slider-item'>
+                    <img src="https://i.pinimg.com/originals/71/88/c1/7188c14fd68ea73e9444fb9cd7df3d77.jpg" width="100px"
+            height="300px" alt="">
+                </div>
+        
+                <div class="slider-item" name='slider-item'>
+                    <img src="https://dathangtaobao.vn/wp-content/uploads/2018/10/a.jpg" height="300">
+                </div>
+
+                <div class="slider-item" name='slider-item'>
+                    <img src="https://magiamgiashopee.vn/wp-content/uploads/2019/07/Si%C3%AAu-Sale-Freeship-Shopee.png.webp" height="300">
+                </div>
+        
+        
+                <a onclick="onclickXemAnhTruoc()" class="truoc">&lt; </a>
+                <a onclick="onclickXemAnhSau()" class="sau">&gt;</a>
+            </div>
+    </section>
+
+    <section id="products">
+        <div class="items">
+            <div class="item">
+                <div class="item-thumb">
+                    <img src="https://cdn.tgdd.vn/Products/Images/42/60546/iphone-5s-16gb-13-300x300.jpg" alt="">
+                </div>
+
+                <h2 class="item-title">Iphone5</h2>
+                <div class="item-price">
+                    <span class="item-price-origin">5000000 đ</span>
+                    <span class="item-price-sale">4000000 đ</span>
+                </div>
+                <button class="btn btn-primary">Đưa vào giỏ hàng</button>
+            </div>
+            <div class="item">
+                <div class="item-thumb">
+                    <img src="https://cdn.tgdd.vn/Products/Images/42/60546/iphone-5s-16gb-13-300x300.jpg" alt="">
+                </div>
+
+                <h2 class="item-title">Iphone5</h2>
+                <div class="item-price">
+                    <span class="item-price-origin">5000000 đ</span>
+                    <span class="item-price-sale">4000000 đ</span>
+                </div>
+                <button  class="btn btn-primary">Đưa vào giỏ hàng</button>
+            </div>
+
+
+
+
+        </div>
+    </section>
+
+    <footer>
+        Copyright by @ElectricMarket 2002
+    </footer>
+
+    <script>
+        /* slider */
+        var viTriSliderItemHienThiHienTai = 0;
+        var danhSachSliderItem = document.getElementsByName('slider-item');
+        console.log(danhSachSliderItem);
+        hienThiSliderItem(viTriSliderItemHienThiHienTai);
+
+        function onclickXemAnhSau() {
+            viTriSliderItemHienThiHienTai = viTriSliderItemHienThiHienTai + 1;
+            if (viTriSliderItemHienThiHienTai == danhSachSliderItem.length) {
+                viTriSliderItemHienThiHienTai = 0;
+            }
+            hienThiSliderItem(viTriSliderItemHienThiHienTai);
+        }
+
+        function onclickXemAnhTruoc(){
+            viTriSliderItemHienThiHienTai = viTriSliderItemHienThiHienTai - 1;
+            if (viTriSliderItemHienThiHienTai == danhSachSliderItem.length-1) {
+                viTriSliderItemHienThiHienTai = 1;
+            }
+            hienThiSliderItem(viTriSliderItemHienThiHienTai);
+        }
+
+        function hienThiSliderItem(viTri) {
+            for (var i = 0; i < danhSachSliderItem.length; i++) {
+                danhSachSliderItem[i].style.display = 'none';
+            }
+
+            danhSachSliderItem[viTri].style.display = 'block';
+        }
+
+
+        var jsonDanhSachSanPham = localStorage.getItem('danhSachSanPham');
+        var danhSachSanPham = taoDoiTuongSanPham().fromJsons(jsonDanhSachSanPham);
+        console.log(danhSachSanPham);
+
+        var HTML = chuyenDanhSachDoiTuongSanPhamThanhHTML(danhSachSanPham);
+
+        var nodeProducts = document.getElementById('products');
+        nodeProducts.innerHTML = HTML;
+
+        function onClickDuaVaoGioHang(idSanPham) {
+         
+            var danhSachItemGioHang = layDanhSachItemGioHang();
+
+            var coTonTaiTrongDanhSachItemGioHang = false;
+            for (var i = 0; i < danhSachItemGioHang.length; i++) {
+                var itemGioHangHienTai = danhSachItemGioHang[i];
+                if (itemGioHangHienTai.idSanPham == idSanPham) {
+                    danhSachItemGioHang[i].soLuong++;
+                    coTonTaiTrongDanhSachItemGioHang = true;
+                }
+            }
+
+            if (coTonTaiTrongDanhSachItemGioHang == false) {
+                var itemGioHang = taoDoiTuongItemGioHang(idSanPham, 1);
+                danhSachItemGioHang.push(itemGioHang);
+            }
+
+            luuDanhSachItemGioHangVaoLocalStorage(danhSachItemGioHang);
+        }
+
+    </script>
+
+</body>
+
+</html>
